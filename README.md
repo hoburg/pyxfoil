@@ -1,19 +1,13 @@
-======================
-*README
-======================
-
 File name: genpolar.py
 Author: Steven Chiu
 
 genpolar provides an entrance to the pyxfoil module which provides an interface between python and XFOIL.
 The genpolar interface behaves like the standard python interpreter.
 
-======================
-*STARTING GENPOLAR
-======================
+STARTING GENPOLAR
 
 From the terminal, enter
-> python genpolar.py [ run-name ]
+`python genpolar.py [ run-name ]`
 If no run name is provided, genpolar will prompt for a run.
 If the run does not exist, genpolar will create a new run with the given name and the following directory structure:
 
@@ -26,15 +20,14 @@ run-name/logs/             contains session logs, XFOIL output logs, etc.
 
 Otherwise genpolar will open the existing file with the given name.
 
-***IMPORTANT: Always exit from a run by calling 'quit'.  This ensures that the logs are properly written
+IMPORTANT: Always exit from a run by calling 'quit'.  This ensures that the logs are properly written
 
-======================
-*COMMANDS
-======================
+COMMANDS
 
 Genpolar behaves like the python interpreter with built in functions for use with pyxfoil.
 The three main functions are:
 
+```python
 sweep(airfoils, res, write_file, plots_on, panels):
     Runs a large sweep over the set airfoils x res
 
@@ -57,22 +50,21 @@ fill(threshold, stepsize, write_file, plots_on, panels):
 merge():
     Merges .pol files with _aug.pol files
     Dumps the original files in cwd/mergedump/
+```
 
-======================
-*SAMPLE INPUT/OUTPUT
-======================
+SAMPLE INPUT/OUTPUT
 
+```
 ~/aero_models/profile_drag/chiu$ vim genpolar.py smallrun
 New run created: smallrun
 Genpolar >> nacaset = ['2413', '2414', '2415']
 Genpolar >> import numpy     
 Genpolar >> reynolds_set = numpy.logspace(4, 8, 41)
 Genpolar >> sweep(nacaset, reynolds_set)
-***
+
 Airfoil = NACA2413 Re = 10000.0
 CL successfully zeroed: a = 1.321
 
-...
 
 Airfoil = NACA2415 Re = 100000000.0
 CL successfully zeroed: a = -2.086
@@ -88,11 +80,8 @@ Number of simulations: 123
 Average simulation length: 9.856 seconds.
 
 Genpolar >> fill()
-***
 Airfoil = NACA2415 Re = 12000.0
 Beginning simulation at a = -2.317
-
-...
 
 Airfoil = NACA2414 Re = 15000.0
 Beginning simulation at a = -2.348
@@ -106,3 +95,4 @@ Average simulation length: 2.195 seconds.
 Genpolar >> merge()
 4 files merged with their filler files.
 Genpolar >> quit
+```
